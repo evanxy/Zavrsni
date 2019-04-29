@@ -1,0 +1,117 @@
+
+
+<?php 
+  $head = "<link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">";
+
+ $js="
+ <script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>
+ <script>
+ var putanja=\"" . APP::config("url") .  "\";
+ let sifrautrka = " . Request::post("sifra") .";
+ </script>
+ <script src=\"" . APP::config("url") . "public/js/utrke/edit.js\"></script>";
+?>
+
+
+<style>
+span{
+  margin: 5px;
+  padding: 5px;
+  font-size: 1.4rem !important;
+  cursor: pointer !important;
+}
+.podebljano{
+  font-weight: bold;
+}
+</style>
+<form class="log-in-form" method="post" 
+action="<?php echo App::config("url") ?>utrka/edit/<?php echo Request::post("sifra") ?>">
+
+
+<div class="grid-x">
+<div class="large-3 columns">
+        
+  
+
+  <label>Naziv
+    <input type="text" name="naziv" 
+    value="<?php echo Request::post("naziv") ?>" />
+  </label>
+
+  <label for="dogadaj">Događaj</label>
+  <select name="dogadaj" id="dogadaj">
+  <option value="0">Odaberi događaj</option>
+
+  <?php foreach(dogadaj::read() as $dogadaj): ?>
+
+    
+
+    <option 
+
+      <?php if(Request::post("dogadaj")==$dogadaj->sifra):?>
+      selected="selected" 
+      <?php endif;?>
+
+      value="<?php echo $dogadaj->sifra ?>"><?php echo $dogadaj->naziv ?></option>
+
+  <?php endforeach; ?>
+
+  </select>
+
+<label>Datum
+    <input type="date" name="datum" 
+    value="<?php 
+    if(Request::post("datum")!=null){
+      echo date("Y-m-d",strtotime(Request::post("datum")));
+    }
+     ?>" />
+  </label>
+
+  <label>Broj sudionika
+    <input type="number" name="brojsudionika" 
+    value="<?php echo Request::post("brojsudionika") ?>" />
+  </label>
+
+  </div>
+  <div class="large-1 columns">
+  </div>
+    <div class="large-8 columns" style="overflow: auto; max-height: 400px;">
+    <div class="callout">
+      Traži sudionika
+      <input type="text" id="uvjet">
+        <table>
+          <thead>
+            <tr>
+              <th>Ime i prezime</th>
+              <th>Akcija</th>
+            </tr>
+          </thead>
+          <tbody id="podaci">
+          <?php foreach(Sudionik::readGroups(Request::post("sifra")) as $p): ?>
+            <tr>
+              <td><?php echo $p->sudionik ?></td>
+              <td> <a class="obrisi" id="p_<?php echo $p->sifra ?>" href="#">Obriši</a> </td>
+            </tr>
+          <?php endforeach;?>
+          </tbody>
+        </table>
+       </div>
+    </div>
+</div>
+
+  
+ <div class="grid-x">
+    <div class="large-6 columns" style="padding: 10px;">
+        <a href="<?php echo App::config("url") ?>utrka/index" class="alert button expanded">
+            Odustani
+        </a>
+    </div>
+    <div class="large-6 columns"  style="padding: 10px;">
+        <input type="submit" class="success button expanded" value="Promjeni" />
+    </div>
+ </div>
+  
+
+</form>
+<?php echo $poruka ?>
+

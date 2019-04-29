@@ -1,0 +1,27 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <?php include_once "head.phtml" ?>
+    <?php echo $head ?>
+  </head>
+  <body>
+    <div class="grid-container">
+
+   
+
+    <?php include_once "izbornik.phtml" ?>
+       
+        <div class="callout" style="min-height: 400px;">
+            <?php echo $content ?>
+           
+        </div>
+      
+    </div>
+    
+    <script src="<?php echo App::config("url") ?>public/js/vendor/jquery.js"></script>
+    <script src="<?php echo App::config("url") ?>public/js/vendor/what-input.js"></script>
+    <script src="<?php echo App::config("url") ?>public/js/vendor/foundation.js"></script>
+    <script src="<?php echo App::config("url") ?>public/js/app.js"></script>
+    <?php echo $js ?>
+  </body>
+</html>

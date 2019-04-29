@@ -1,0 +1,30 @@
+<a href="<?php echo App::config("url") ?>dogadaj/prepareadd" class="success button expanded">
+    Dodaj novi događaj
+</a>
+<table>
+    <thead>
+        <tr>
+            <th>Naziv</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($dogadaji as $dogadaj): ?>
+        <tr>
+            <td><?php echo $dogadaj->naziv ?></td>
+            <td> 
+                <a href="<?php echo App::config("url") ?>dogadaj/prepareedit/<?php echo $dogadaj->sifra ?>">
+                    <i class="fas fa-edit fa-2x"></i>
+                </a>
+
+                <?php if($dogadaj->ukupno==0): ?>
+                    <a style="color: red;"
+                     href="<?php echo App::config("url") ?>dogadaj/delete/<?php echo $dogadaj->sifra ?>">
+                        <i class="fas fa-trash fa-2x"></i>
+                    </a>
+                <?php endif; ?>
+            
+             </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>

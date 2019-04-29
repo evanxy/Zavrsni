@@ -1,0 +1,74 @@
+<div class="grid-x">
+    <div class="large-12 medium-12 small-12 columns">
+        <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+            <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+            <div class="title-bar-title">Izbornik</div>
+        </div>
+
+        <div class="top-bar" id="example-menu">
+            <div class="top-bar-left">
+                <ul class="dropdown menu izbornikStavke" data-dropdown-menu>
+                    <li>
+                    <?php include_once "slikaLogo.phtml" ?>
+                    </li>
+                    <li>
+                        <a href="<?php echo App::config("url")."index" ?>">Početna</a>
+
+                    </li>
+                    <li>
+                        <a href="<?php echo App::config("url")."onama" ?>">O nama</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo App::config("url")."kontakt" ?>">Kontakt</a>
+                    </li>
+
+                    <?php if(Session::getInstance()->isLogiran()): ?>
+                    <li>
+                        <a href="<?php echo App::config("url")."nadzornaPloca" ?>">Nadzorna ploča</a>
+                    </li>
+                    <li>
+                        <a href="#">Programi</a>
+                        <ul class="menu vertical">
+                            <li>
+                                <a href="<?php echo App::config("url")."smjer/index" ?>">Smjerovi</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo App::config("url")."polaznik/index" ?>">Polaznici</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo App::config("url")."predavac/index" ?>">Predavači</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo App::config("url")."grupa/index" ?>">Grupe</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="<?php echo App::config("url")."operater/index" ?>">Operateri</a>
+                    </li>
+                    
+                    <li>
+                        <a href="<?php echo App::config("url")."curl/index" ?>">CURL</a>
+                    </li>
+                    <?php endif; ?>
+
+
+                </ul>
+            </div>
+            <div class="top-bar-right">
+                <ul class="menu izbornikStavke">
+                    <li>
+                        <?php if(Session::getInstance()->isLogiran()): ?>
+                        <a href="<?php echo App::config("url") ?>admin/odjava">Odjava
+                            <?php echo Session::getInstance()->getUser()->imePrezime ?>
+                        </a>
+                        <?php else:?>
+                        <a href="<?php echo App::config("url") ?>admin/prijava">Prijava</a>
+                        <?php endif;?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

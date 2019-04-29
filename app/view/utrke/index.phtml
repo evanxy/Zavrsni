@@ -1,0 +1,47 @@
+<a href="<?php echo App::config("url") ?>utrka/add" class="success button expanded">
+    Dodaj novu utrku
+</a>
+<table>
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th class="hide-for-small-only">Datum</th>
+            <th class="hide-for-small-only">Broj sudionika</th>
+            <th class="hide-for-small-only">Događaj</th>
+            <th class="hide-for-small-only">Kotizacija</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($utrke as $utrka): ?>
+        <tr>
+            <td><?php echo $utrka->naziv ?></td>
+            <td class="hide-for-small-only"><?php 
+                if($utrka->datum!=null){
+                    echo date("d. m. Y.",strtotime($utrka->datum));
+                }else{
+                    echo "Nije definirano";
+                } ?>
+            </td>
+            <td class="hide-for-small-only"><?php echo $utrka->brojsudionika ?></td>
+            <td class="hide-for-small-only"><?php 
+                echo $utrka->dogadaj==null ? "Nije definirano" : $utrka->dogadaj; ?>
+            </td>
+            <td class="hide-for-small-only"><?php echo $utrka->kotizacija ?></td>
+            <td> 
+                <a href="<?php echo App::config("url") ?>utrka/prepareedit/<?php echo $utrka->sifra ?>">
+                    <i class="fas fa-edit fa-2x"></i>
+                </a>
+
+                <?php if($utrka->ukupno==0): ?>
+                    <a style="color: red;"
+                     href="<?php echo App::config("url") ?>utrka/delete/<?php echo $utrka->sifra ?>">
+                        <i class="fas fa-trash fa-2x"></i>
+                    </a>
+                <?php endif; ?>
+            
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
